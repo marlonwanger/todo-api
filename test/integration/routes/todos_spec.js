@@ -68,6 +68,7 @@ describe('Routes: Todos', () => {
     it('should update a todo', done => {
       const updateTodo = {
         id: 1,
+        description: 'todo updated',
         completed: true
       }
 
@@ -80,5 +81,19 @@ describe('Routes: Todos', () => {
         });
     });
   });
+
+  describe('DELETE /todos/1', () => {
+    it('shoul delete a todo', done => {
+
+      request
+        .delete('/todos/1')
+        .end( (err, res) => {
+          expect(res.statusCode).to.be.eql(204); //204 = no content
+          done(err);
+        })
+
+    });
+  });
+
 
 });

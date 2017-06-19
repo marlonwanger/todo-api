@@ -26,10 +26,22 @@ class TodosController {
 
   update(req, res) {
     return this.Todo.update(req.body, {
-      where: req.params.id
+      where: {
+        id: req.params.id
+      }
     })
-      .then(result => res.send(result))
-      .catch(err => res.send(err.message))
+    .then(result => res.send(result))
+    .catch(err => res.send(err.message))
+  }
+
+  delete(req, res) {
+    return this.Todo.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then( result => res.sendStatus(204))
+    .catch( error => res.status(201).send(error.message));
   }
 
 }
